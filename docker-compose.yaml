@@ -1,0 +1,11 @@
+version: '3.9'
+
+services: 
+  pythoncompapp:
+    build: .
+    ports:
+      - "8081:5000"
+    volumes:
+      - "storage:/app"
+volumes:
+  storage:
