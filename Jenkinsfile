@@ -13,6 +13,7 @@ pipeline {
         '''
      }
    }
+     
     stage ('test') {
       steps {
         sh '''#!/bin/bash
@@ -28,25 +29,6 @@ pipeline {
        }
     }
 
-     stage('Create_Cont') {
-        agent{label 'docker_agent'}
-        steps{
-          sh '''#!/bin/bash
-          
-          '''
-        }
-      }
-     
-     stage('Push') {
-        agent{label 'docker_agent'}
-        steps{
-          sh '''#!/bin/bash
-          
-          '''
-        }
-      }
-
-        
-      
+         
    }
 }
