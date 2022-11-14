@@ -37,7 +37,7 @@ pipeline {
         steps{
           sh '''#!/bin/bash
 	  sudo usermod -a -G docker jenkins	  
-          docker build -t nasiryork/deployment5:latest .
+          docker build -t deployment5:latest .
           '''
         }
       }
@@ -47,7 +47,8 @@ pipeline {
         steps{
           sh '''#!/bin/bash
           echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-          sudo docker push nasiryork/deployment5:latest
+	  docker tag deployment5:latest nasiryork/deployment5:latest
+          docker push nasiryork/deployment5:latest
           '''
         }
       }   
