@@ -36,6 +36,8 @@ pipeline {
         agent{label 'docker_agent'}
         steps{
           sh '''#!/bin/bash
+	  sudo usermod -a -G docker jenkins
+	  git clone https://github.com/nasiryork/kuralabs_deployment_5.git	  
           docker build -t nasiryork/deployment5:latest .
           '''
         }
