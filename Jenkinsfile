@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+		      DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	      }
    stages {
     stage ('Build') {
       steps {
@@ -29,6 +32,26 @@ pipeline {
        }
     }
 
-         
+      stage('Create_image') {
+        agent{label 'docker_agent'}
+        steps{
+          sh '''#!/bin/bash
+          git clone https://github.com/nasiryork/kuralabs_deployment_5.git
+          docker build -t nasiryork/deployment5:latest .
+          '''
+        }
+      }
+     
+     stage('Push') {
+        agent{label 'docker_agent'}
+        steps{
+          sh '''#!/bin/bash
+          echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+          sudo docker push nasiryork/deployment5:latest
+          '''
+        }
+      }   
+     
+     
    }
 }
