@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
   [
   {
       "name": "url-container",
-      "image": "nasiryork/url_flask_app:latest",
+      "image": "nasiryork/deployment5:latest",
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
